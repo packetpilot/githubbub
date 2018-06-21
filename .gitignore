@@ -1,0 +1,6 @@
+!/.ruby-version
+!/.gitignore
+/.token
+
+# Remove this if you want reports published to the repo itself:
+/*.md
