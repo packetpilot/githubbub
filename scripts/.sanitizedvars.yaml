@@ -1,0 +1,16 @@
+org: evilcorp
+repofields:
+  - name
+  - private
+  - created_at
+  - pushed_at
+  - language
+  - forks_count
+  - size
+  - url
+  - description
+botroster:
+  - ecorp-deploy
+  - ecorp-gitlabrunner
+  - ecorp-jenkinsbot
+  - ecorp-pullbot

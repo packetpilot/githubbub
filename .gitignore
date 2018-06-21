@@ -1,5 +1,6 @@
 !/.ruby-version
 !/.gitignore
+!/scripts/.sanitizedvars.yaml
 /.token
 
 # Remove this if you want reports published to the repo itself:

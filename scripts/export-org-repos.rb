@@ -20,9 +20,11 @@ require_relative 'common'
 
 repos = Octokit.org_repos @vars['org']
 
+outfile = "#{@vars['org']}-repos.md"
+
 repofields = @vars['repofields']
 
-CSV.open("#{@vars['org']}-repos.md", "wb",
+CSV.open("#{outfile}", "wb",
   :col_sep => '|',
   :headers => repofields,
   :write_headers => true

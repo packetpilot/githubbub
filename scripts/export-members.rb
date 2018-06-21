@@ -14,13 +14,16 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+
 require_relative 'common'
 
 members = Octokit.org_members @vars['org']
 
-title = "### Org Members"
+outfile = "#{@vars['org']}-members.md"
 
-CSV.open("#{@vars['org']}-members.md", "wb") do |csv|
+title = "### Org Members (#{members.count})"
+
+CSV.open("#{outfile}", "wb") do |csv|
   csv << [ title ]
   members.each do |m|
     csv << [ m[:login].prepend("- ") ]

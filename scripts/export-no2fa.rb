@@ -14,17 +14,28 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+
 require_relative 'common'
 
 members = Octokit.org_members @vars['org'], :filter => "2fa_disabled"
 
+outfile = "#{@vars['org']}-members-no2fa.md"
+
 title = "### Org Members with 2FA Off"
 
-CSV.open("#{@vars['org']}-members-no2fa.md", "wb") do |csv|
+CSV.open("#{outfile}", "wb") do |csv|
   csv << [ title ]
   members.each do |m|
     unless @vars['botroster'].include?(m[:login])
       csv << [ m[:login].prepend("- ") ]
     end
+  end
+end
+
+line_count = %x{wc -l "#{outfile}"}.split.first.to_i
+if line_count == 1
+  goodnews = "### Looks like all human members have 2FA on as of the last run."
+  File.open("#{outfile}", 'wb') do |c|
+    c << goodnews
   end
 end
