@@ -14,7 +14,6 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
-#!/usr/bin/env ruby
 
 require_relative 'common'
 
@@ -31,10 +30,16 @@ CSV.open("#{outfile}", "wb",
   ) do |csv|
     csv << Array.new(repofields.length, "---")
     repos.each_with_index do |r, i|
-      # this needs work.
+      # this needs work; duct tape for now
+      # TODO: sort out why quotes are at beg/end of each line
       fields = repofields.map{ |f| eval "r[:#{f}]" }.join('|')
       csv << [ fields ]
       # repeat the headers.
       csv << repofields if (i + 1) % 10 == 0
     end
 end
+
+# duct tape to get quotes out
+badcsv = File.read("#{outfile}")
+nuke = badcsv.gsub(/^"/, '').gsub(/"$/, '')
+File.open("#{outfile}", "wb") { |file| file.puts nuke }
